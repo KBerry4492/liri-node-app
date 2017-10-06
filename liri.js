@@ -38,15 +38,10 @@ inquirer.prompt([
 	console.log(answers.selection);
 	switch(answers.selection){
 		case "my-tweets":
-			console.log("Tweet");
 			var Twit = new Twitter;
-			// Twit.GetTweets();
 			break;
 		case "spotify-this-song":
-			console.log(answers.song);
-
 			var spot = new Spotify;
-
 			if (answers.song === ''){
 				spot.SongSearch("The Sign Ace of Base");
 			}
@@ -55,9 +50,7 @@ inquirer.prompt([
 			}
 			break;
 		case "movie-this":
-			console.log(answers.movie);
 			var omdb = new OMDB;
-
 			if (answers.movie === ''){
 				omdb.movieSearch("Mr Nobody");
 			}
@@ -65,9 +58,37 @@ inquirer.prompt([
 				omdb.movieSearch(answers.movie);
 			}
 			break;
+
 		case "do-what-it-says":
-			console.log("Rando!");
-			break;
+			fs.readFile('random.txt', 'UTF-8', (err, data) => {
+			  if (err) throw err;
+			  var rand = data.split("/");
+			  console.log(rand[0], rand[1]);
+
+			  //There has to be a better way to do this...but I have work in 1/2hr ~_~
+			  if(rand[0] === "my-tweets"){
+					var Twit = new Twitter;
+					}
+			  else if(rand[0] === "spotify-this-song"){
+					var spot = new Spotify;
+					if (rand[1] === ''){
+						spot.SongSearch("The Sign Ace of Base");
+					}
+					else {
+						spot.SongSearch(rand[1]);
+					}
+				}
+			  else if(rand[0] === "movie-this"){
+					var omdb = new OMDB;
+					if (rand[1] === ''){
+						omdb.movieSearch("Mr Nobody");
+					}
+					else {
+						omdb.movieSearch(rand[1]);
+					}
+				}
+			});
+		break;
 		
 	}
 });

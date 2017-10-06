@@ -9,20 +9,20 @@ var OMDB = function(){
   request('http://www.omdbapi.com/?apikey='+key.api_key+'&type=movie&t='+this.query, function (error, response, body) {
 
   // * Title of the movie.
-  // * Year the movie came out.
-  // * IMDB Rating of the movie.
-  // * Rotten Tomatoes Rating of the movie.
-  // * Country where the movie was produced.
-  // * Language of the movie.
-  // * Plot of the movie.
-  // * Actors in the movie.
   var title = JSON.parse(body).Title;
-  var year = JSON.parse(body).Year;
-  var imdbRat = JSON.parse(body).Ratings[0].Value;
+  // * Year the movie came out.
+   var year = JSON.parse(body).Year;
+ // * IMDB Rating of the movie.
+    var imdbRat = JSON.parse(body).Ratings[0].Value;
+// * Rotten Tomatoes Rating of the movie.
   var rtRat = JSON.parse(body).Ratings[1].Value;
+  // * Country where the movie was produced.
   var cont = JSON.parse(body).Country;
+  // * Language of the movie.
   var lang = JSON.parse(body).Language;
-  var plot = JSON.parse(body).Plot;
+  // * Plot of the movie.
+    var plot = JSON.parse(body).Plot;
+// * Actors in the movie.
   var act = JSON.parse(body).Actors;
   
 
